@@ -1,13 +1,15 @@
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import Navbar from "./components/Navbar";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 function App() {
   return (
-    <div className="flex-center">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    // max-w-6xl mx-auto flex items-center justify-between py-4 px-6
+    <main >
+      <Navbar />
+    </main>
   );
 }
 

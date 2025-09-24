@@ -70,7 +70,7 @@ body {
     @apply fixed z-50 w-full;
 
     div {
-      @apply container mx-auto flex flex-col items-center gap-5 px-5 py-5 md:flex-row md:justify-between lg:px-0;
+      @apply container mx-auto flex flex-col items-center gap-5 px-5 py-5 md:flex-row md:justify-between ;
     }
 
     p {
