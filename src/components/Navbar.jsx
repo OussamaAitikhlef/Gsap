@@ -130,7 +130,7 @@ function NavBar() {
           onClick={handleLogoClick}
         >
           <img src="/images/logo.png" alt="Logo" className="h-8 w-auto" />
-          <p className="font-semibold">Velvet Pour</p>
+          <p className="font-semibold">Liquorium</p>
         </a>
 
         <ul
