@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
 
 @import "tailwindcss";
@@ -70,7 +68,7 @@ body {
     @apply fixed z-50 w-full;
 
     div {
-      @apply container mx-auto flex flex-col items-center gap-5 px-5 py-5 md:flex-row md:justify-between ;
+      @apply container mx-auto flex flex-col items-center gap-5 px-5 py-5 md:flex-row md:justify-between;
     }
 
     p {
@@ -222,10 +220,14 @@ body {
 
       > div {
         @apply relative h-72 overflow-hidden rounded-3xl;
+        @apply flex items-center justify-center; /* Center content */
       }
 
       img {
         @apply h-full w-full object-cover;
+        @apply object-center; /* Ensure proper centering */
+        @apply transform-gpu; /* Hardware acceleration for smooth animations */
+        @apply will-change-transform; /* Optimize for animations */
       }
     }
 
@@ -234,10 +236,14 @@ body {
 
       > div {
         @apply relative h-72 overflow-hidden rounded-3xl;
+        @apply flex items-center justify-center; /* Center content */
       }
 
       img {
         @apply h-full w-full object-cover;
+        @apply object-center; /* Ensure proper centering */
+        @apply transform-gpu; /* Hardware acceleration for smooth animations */
+        @apply will-change-transform; /* Optimize for animations */
       }
     }
   }
