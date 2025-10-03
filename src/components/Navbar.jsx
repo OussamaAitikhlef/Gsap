@@ -141,7 +141,7 @@ function NavBar() {
             <li key={link.id} className="overflow-hidden">
               <a 
                 href={`#${link.id}`} 
-                className="text-sm text-white hover:text-purple-300 transition-colors duration-200 relative group"
+                className="text-xs text-white hover:text-purple-300 transition-colors duration-200 relative group"
               >
                 <p className="relative z-10">{link.title}</p>
               </a>
