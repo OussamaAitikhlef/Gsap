@@ -13,17 +13,21 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 function App() {
   return (
-    <main>
+    <>
       <TargetCursor />
-      <NavBar />
-      <Hero />
-      <TheBar />
-      <OurStory />
-      <TheCraft /> 
-      <Menu />
-      <Contact />
-    </main>
+      <header>
+        <NavBar />
+      </header>
+      <main id="main-content">
+        <Hero />
+        <TheBar />
+        <OurStory />
+        <TheCraft />
+        <Menu />
+      </main>
+      <footer>
+        <Contact />
+      </footer>
+    </>
   );
-}
-
-export default App;
+}export default App;

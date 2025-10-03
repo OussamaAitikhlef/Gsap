@@ -165,32 +165,54 @@ function NavBar() {
       ref={navRef}
       className="fixed top-0 left-0 z-50 w-full transition-all duration-300"
       style={{
-        // Initial CSS for backdrop-filter support
         backdropFilter: "blur(0px)",
-        WebkitBackdropFilter: "blur(0px)", // Safari support
+        WebkitBackdropFilter: "blur(0px)",
         backgroundColor: "transparent",
-        // Ensure proper layering
         isolation: "isolate",
       }}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
+        <a
+          href="#main-content"
+          className="skip-to-main-content sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-black focus:p-4"
+        >
+          Skip to main content
+        </a>
+
         <a
           href="#home"
           className="flex items-center gap-2 text-white transition-colors hover:text-purple-300"
           onClick={handleLogoClick}
+          aria-label="Liquorium - Back to top"
         >
-          <img src="/images/logo.png" alt="Logo" className="h-8 w-auto" />
+          <img
+            src="/images/logo.png"
+            alt=""
+            className="h-8 w-auto"
+            aria-hidden="true"
+          />
           <p className="font-semibold">Liquorium</p>
         </a>
 
-        <ul ref={linksRef} className="flex items-center gap-7">
+        <ul
+          ref={linksRef}
+          className="flex items-center gap-7"
+          role="menubar"
+          aria-label="Main menu"
+        >
           {navLinks.map((link) => (
-            <li key={link.id} className="overflow-hidden">
+            <li key={link.id} className="overflow-hidden" role="none">
               <a
                 href={`#${link.id}`}
                 className="group relative text-xs text-white transition-colors duration-200 hover:text-purple-300"
+                role="menuitem"
+                aria-current={
+                  window.location.hash === `#${link.id}` ? "page" : undefined
+                }
               >
-                <p className="relative z-10">{link.title}</p>
+                {link.title}
               </a>
             </li>
           ))}

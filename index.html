@@ -2,12 +2,108 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/images/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Liquorium</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Liquorium | Craft Cocktails & Premium Bar Experience</title>
+    <meta
+      name="title"
+      content="Liquorium | Craft Cocktails & Premium Bar Experience"
+    />
+    <meta
+      name="description"
+      content="Experience exceptional craft cocktails and premium spirits at Liquorium. Our expert mixologists create unique drinks in an elegant atmosphere."
+    />
+    <meta
+      name="keywords"
+      content="craft cocktails, premium bar, mixology, spirits, bar experience, cocktail lounge"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta
+      property="og:title"
+      content="Liquorium | Craft Cocktails & Premium Bar Experience"
+    />
+    <meta
+      property="og:description"
+      content="Experience exceptional craft cocktails and premium spirits at Liquorium. Our expert mixologists create unique drinks in an elegant atmosphere."
+    />
+    <meta property="og:image" content="/images/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yourdomain.com/" />
+    <meta
+      property="twitter:title"
+      content="Liquorium | Craft Cocktails & Premium Bar Experience"
+    />
+    <meta
+      property="twitter:description"
+      content="Experience exceptional craft cocktails and premium spirits at Liquorium. Our expert mixologists create unique drinks in an elegant atmosphere."
+    />
+    <meta property="twitter:image" content="/images/og-image.jpg" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Preload Font -->
+    <link
+      rel="preload"
+      href="/fonts/ModernNegraDemo.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Liquorium",
+        "image": "/images/og-image.jpg",
+        "@id": "https://yourdomain.com",
+        "url": "https://yourdomain.com",
+        "description": "Experience exceptional craft cocktails and premium spirits at Liquorium. Our expert mixologists create unique drinks in an elegant atmosphere.",
+        "servesCuisine": "Cocktail Bar",
+        "priceRange": "$$",
+        "menu": "https://yourdomain.com/#menu",
+        "acceptsReservations": "True",
+        "areaServed": {
+          "@type": "City",
+          "name": "Your City"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Sunday"
+            ],
+            "opens": "16:00",
+            "closes": "00:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Friday", "Saturday"],
+            "opens": "16:00",
+            "closes": "02:00"
+          }
+        ]
+      }
+    </script>
   </body>
 </html>
