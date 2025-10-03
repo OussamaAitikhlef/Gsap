@@ -240,7 +240,7 @@ const OurStory = () => {
     });
 
     // Add hover effects for interactivity
-    topContainers.forEach((container, index) => {
+    topContainers.forEach((container) => {
       const img = container.querySelector("img");
 
       container.addEventListener("mouseenter", () => {
@@ -264,7 +264,7 @@ const OurStory = () => {
       });
     });
 
-    bottomContainers.forEach((container, index) => {
+    bottomContainers.forEach((container) => {
       const img = container.querySelector("img");
 
       container.addEventListener("mouseenter", () => {

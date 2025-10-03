@@ -10,6 +10,7 @@ function NavBar() {
   const linksRef = useRef(null);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const prevScrollY = useRef(0);
+  const isScrollingDownRef = useRef(isScrollingDown);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -19,7 +20,7 @@ function NavBar() {
         autoAlpha: 0,
         duration: 0.5,
         delay: 0.5,
-        ease: 'power4.out',
+        ease: "power4.out",
       });
 
       // Staggered entrance for nav links
@@ -31,32 +32,35 @@ function NavBar() {
         y: -20,
         opacity: 0,
         duration: 1,
-        ease: 'power1.out',
+        ease: "power1.out",
         stagger: { each: 0.15, from: "start" },
         delay: 0.7,
       });
 
       // Backdrop blur animation with ScrollTrigger
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: navRef.current,
-          start: "top top",
-          end: "top top-=50",
-          toggleActions: "play reverse play reverse",
-          scrub: 0.3,
-        }
-      }).fromTo(navRef.current, 
-        { 
-          backdropFilter: "blur(0px)",
-          backgroundColor: "rgba(0, 0, 0, 0)"
-        },
-        {
-          backdropFilter: "blur(10px)",
-          backgroundColor: "rgba(116, 149, 101, 0.253)",
-          duration: 0.6,
-          ease: "power1.out",
-        }
-      );
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: navRef.current,
+            start: "top top",
+            end: "top top-=50",
+            toggleActions: "play reverse play reverse",
+            scrub: 0.3,
+          },
+        })
+        .fromTo(
+          navRef.current,
+          {
+            backdropFilter: "blur(0px)",
+            backgroundColor: "rgba(0, 0, 0, 0)",
+          },
+          {
+            backdropFilter: "blur(10px)",
+            backgroundColor: "rgba(116, 149, 101, 0.253)",
+            duration: 0.6,
+            ease: "power1.out",
+          },
+        );
 
       // Simple scroll handler for show/hide
       const handleScroll = () => {
@@ -65,19 +69,20 @@ function NavBar() {
         const hideNavbar = currentScrollY > 300;
 
         setIsScrollingDown(scrollingDown);
+        isScrollingDownRef.current = scrollingDown;
 
         // Only hide/show navbar, no padding changes
         if (hideNavbar) {
           gsap.to(navRef.current, {
             yPercent: scrollingDown ? -100 : 0,
-            ease: 'power2.out',
+            ease: "power2.out",
             duration: 0.2, // Much faster
           });
         } else {
           // Always show when near top
           gsap.to(navRef.current, {
             yPercent: 0,
-            ease: 'power2.out',
+            ease: "power2.out",
             duration: 0.2,
           });
         }
@@ -85,11 +90,56 @@ function NavBar() {
         prevScrollY.current = currentScrollY;
       };
 
-      window.addEventListener('scroll', handleScroll);
+      // Reveal on hover/touch near the top of the viewport
+      const TOP_THRESHOLD = 60; // px from top that will reveal the nav
+      const hoverActive = { current: false };
+
+      const handleMouseMove = (e) => {
+        if (e.clientY <= TOP_THRESHOLD) {
+          if (!hoverActive.current) {
+            hoverActive.current = true;
+            // show nav
+            gsap.to(navRef.current, {
+              yPercent: 0,
+              ease: "power2.out",
+              duration: 0.18,
+            });
+          }
+        } else {
+          if (hoverActive.current) {
+            hoverActive.current = false;
+            // If user is scrolled down far and scrolling down, hide the nav again
+            if (window.scrollY > 300 && isScrollingDownRef.current) {
+              gsap.to(navRef.current, {
+                yPercent: -100,
+                ease: "power2.out",
+                duration: 0.18,
+              });
+            }
+          }
+        }
+      };
+
+      const handleTouchStart = (e) => {
+        const touchY = e.touches && e.touches[0] ? e.touches[0].clientY : 9999;
+        if (touchY <= TOP_THRESHOLD) {
+          gsap.to(navRef.current, {
+            yPercent: 0,
+            ease: "power2.out",
+            duration: 0.18,
+          });
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("touchstart", handleTouchStart);
 
       // Cleanup function
       return () => {
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("touchstart", handleTouchStart);
         gsap.killTweensOf(navRef.current);
       };
     }, navRef);
@@ -99,13 +149,13 @@ function NavBar() {
 
   const handleLogoClick = (event) => {
     event.preventDefault();
-    
+
     // Check if already at top
     if (window.scrollY !== 0) {
       gsap.to(window, {
         duration: 1,
         scrollTo: { y: 0, autoKill: false },
-        ease: 'expo.inOut',
+        ease: "expo.inOut",
       });
     }
   };
@@ -116,32 +166,29 @@ function NavBar() {
       className="fixed top-0 left-0 z-50 w-full transition-all duration-300"
       style={{
         // Initial CSS for backdrop-filter support
-        backdropFilter: 'blur(0px)',
-        WebkitBackdropFilter: 'blur(0px)', // Safari support
-        backgroundColor: 'transparent',
+        backdropFilter: "blur(0px)",
+        WebkitBackdropFilter: "blur(0px)", // Safari support
+        backgroundColor: "transparent",
         // Ensure proper layering
-        isolation: 'isolate',
+        isolation: "isolate",
       }}
     >
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a 
-          href="#home" 
-          className="flex items-center gap-2 text-white hover:text-purple-300 transition-colors"
+      <div className="container mx-auto flex items-center justify-between px-4 py-4">
+        <a
+          href="#home"
+          className="flex items-center gap-2 text-white transition-colors hover:text-purple-300"
           onClick={handleLogoClick}
         >
           <img src="/images/logo.png" alt="Logo" className="h-8 w-auto" />
           <p className="font-semibold">Liquorium</p>
         </a>
 
-        <ul
-          ref={linksRef}
-          className="flex items-center gap-7"
-        >
+        <ul ref={linksRef} className="flex items-center gap-7">
           {navLinks.map((link) => (
             <li key={link.id} className="overflow-hidden">
-              <a 
-                href={`#${link.id}`} 
-                className="text-xs text-white hover:text-purple-300 transition-colors duration-200 relative group"
+              <a
+                href={`#${link.id}`}
+                className="group relative text-xs text-white transition-colors duration-200 hover:text-purple-300"
               >
                 <p className="relative z-10">{link.title}</p>
               </a>

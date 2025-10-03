@@ -6,6 +6,7 @@ import TheBar from "./components/TheBar";
 import OurStory from "./components/OurStory";
 import TheCraft from "./components/TheCraft";
 import Menu from "./components/Menu";
+import Contact from "./components/Contact";
 import TargetCursor from "./components/TargetCursor";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -20,6 +21,7 @@ function App() {
       <OurStory />
       <TheCraft /> 
       <Menu />
+      <Contact />
     </main>
   );
 }

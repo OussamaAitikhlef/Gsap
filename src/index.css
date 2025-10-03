@@ -67,6 +67,14 @@ body {
   nav {
     @apply fixed z-50 w-full;
 
+    /* Improve transform performance and transitions for show/hide */
+    transform: translateZ(0);
+    will-change: transform, backdrop-filter;
+    transition:
+      transform 200ms ease,
+      background-color 200ms ease,
+      backdrop-filter 200ms ease;
+
     div {
       @apply container mx-auto flex flex-col items-center gap-5 px-5 py-5 md:flex-row md:justify-between;
     }
@@ -82,6 +90,17 @@ body {
     ul {
       @apply flex-center gap-7 lg:gap-12;
     }
+  }
+
+  /* Invisible strip at the top to improve hover detection on desktop */
+  .top-hover-strip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* matches JS threshold */
+    pointer-events: none; /* let mouse events pass through, JS listens to window mousemove */
+    z-index: 60;
   }
 
   .noisy {
